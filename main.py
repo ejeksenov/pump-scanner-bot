@@ -6,9 +6,9 @@ import pytz
 import os
 
 # --- Настройки из переменных окружения ---
-TOKEN = os.environ['8004872548:AAHgk4gu9y315Nrp5uW6GgUgGsgb9ID71ko']
-CHANNEL = os.environ['@yel_pump_channel']
-FINNHUB_API_KEY = os.environ['d1puvs1r01qku4u4rtsgd1puvs1r01qku4u4rtt0']
+TOKEN = os.environ['BOT_TOKEN']
+CHANNEL = os.environ['CHANNEL_NAME']
+FINNHUB_API_KEY = os.environ['FINNHUB_KEY']
 
 bot = telebot.TeleBot(TOKEN)
 sent_tickers = set()
