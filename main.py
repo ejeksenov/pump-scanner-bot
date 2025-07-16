@@ -12,6 +12,7 @@ FINNHUB_API_KEY = os.environ['FINNHUB_KEY']
 
 bot = telebot.TeleBot(TOKEN)
 sent_tickers = set()
+sent_test_message = False  # Чтобы не отправлять тестовое сообщение многократно
 
 def is_trading_hours():
     now_est = datetime.now(pytz.timezone('US/Eastern'))
@@ -26,6 +27,7 @@ def get_exchange(symbol):
         return ''
 
 def check_stocks_and_send():
+    print(f"🔁 Запуск проверки акций: {datetime.now().isoformat()}")
     url = f'https://finnhub.io/api/v1/news?category=general&token={FINNHUB_API_KEY}'
     news = requests.get(url).json()
 
@@ -77,8 +79,14 @@ def check_stocks_and_send():
                 print(f"❌ Ошибка отправки {symbol}: {e}")
 
 if __name__ == '__main__':
+    print("🚀 Бот запущен!")
     while True:
         try:
+            if not sent_test_message:
+                bot.send_message(CHANNEL, "✅ Pump Scanner бот запущен и работает!")
+                sent_test_message = True
+                print("📨 Тестовое сообщение отправлено.")
+
             if is_trading_hours():
                 check_stocks_and_send()
             else:
