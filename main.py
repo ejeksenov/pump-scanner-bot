@@ -54,7 +54,7 @@ def check_stocks_and_send():
 
             if not c or not o or not v:
                 continue
-            if c > 10 or v < 1_000_000:
+            if c > 100 or v < 1_000_000:
                 continue
 
             percent = ((c - o) / o) * 100 if o > 0 else 0
